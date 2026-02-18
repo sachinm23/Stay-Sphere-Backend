@@ -9,6 +9,7 @@ namespace StaySphere.Application.Interfaces
     {
         Task RegisterAsync(string name, string email, string password, UserRole role);
         Task<AuthTokensDto> LoginAsync(string email, string password); 
+        Task<AuthTokensDto> RefreshTokenAsync(string refreshToken);
         // Task LogoutAsync(); 
     }
 }

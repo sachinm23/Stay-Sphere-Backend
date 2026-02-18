@@ -29,5 +29,12 @@ namespace StaySphere.API.Controllers
             var result = await _authService.LoginAsync(loginDto.Email, loginDto.Password);
             return Ok(result);
         }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenDto refreshTokenDto)
+        {
+            var result = await _authService.RefreshTokenAsync(refreshTokenDto.RefreshToken);
+            return Ok(result);
+        }
     }
 }

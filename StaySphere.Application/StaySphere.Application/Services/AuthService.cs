@@ -47,5 +47,30 @@ namespace StaySphere.Application.Services
             
         }
 
+        public async Task<AuthTokensDto> RefreshTokenAsync(string refreshToken)
+        {
+            var user = await _userRepository.GetAllAsync();
+            var matchingUser = user.FirstOrDefault(u => u.RefreshToken == refreshToken);
+            if (matchingUser == null || matchingUser.RefreshTokenExpiry < DateTime.UtcNow)
+            {
+                throw new UnauthorizedAccessException("Invalid or expired refresh token.");
+            }
+
+            var newAccessToken = _jwtTokenService.GenerateAccessToken(matchingUser);
+
+            var newRefreshToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            var newRefreshTokenExpiry = DateTime.UtcNow.AddDays(7); 
+
+            matchingUser.RefreshToken = newRefreshToken;
+            matchingUser.RefreshTokenExpiry = newRefreshTokenExpiry;
+            await _userRepository.UpdateAsync(matchingUser); 
+
+            return new AuthTokensDto
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
+            };
+        }
+
     }
 }
