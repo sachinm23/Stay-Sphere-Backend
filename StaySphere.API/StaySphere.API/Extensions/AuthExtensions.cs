@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using StaySphere.Domain.Entities;
+using System.Security.Claims;
 using System.Text;
 
 namespace StaySphere.API.Extensions;
@@ -35,7 +36,8 @@ public static class AuthExtensions
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey =
-                    new SymmetricSecurityKey(key)
+                    new SymmetricSecurityKey(key),
+                RoleClaimType = ClaimTypes.Role    
             };
         });
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StaySphere.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StaySphere.Infrastructure.Data;
 namespace StaySphere.Infrastructure.Migrations
 {
     [DbContext(typeof(StaySphereDbContext))]
-    partial class StaySphereDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260220084014_PropertyModuleSetup")]
+    partial class PropertyModuleSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

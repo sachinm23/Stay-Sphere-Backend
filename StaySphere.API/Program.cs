@@ -1,4 +1,5 @@
 using StaySphere.API.Extensions;
+using Amazon.S3;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ builder.Services.AddSwaggerGen(
         }
     });
 });
+builder.Services.AddAWSService<IAmazonS3>();
 
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);

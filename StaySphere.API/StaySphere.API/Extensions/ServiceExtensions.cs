@@ -3,6 +3,9 @@ using StaySphere.Infrastructure.Data;
 using StaySphere.Application.Interfaces;
 using StaySphere.Application.Services;
 using StaySphere.Infrastructure.Repositories;
+using StaySphere.Application.Interfaces.PropertyInterfaces;
+using StaySphere.Infrastructure.Services;
+
 
 namespace StaySphere.API.Extensions;
 
@@ -16,5 +19,8 @@ public static class ServiceExtensions
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IPropertyService, PropertyService>();
+        services.AddScoped<IPropertyRepository, PropertyRepository>();
+        services.AddScoped<IAwsService, AwsService>();
     }
 }
